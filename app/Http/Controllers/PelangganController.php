@@ -15,7 +15,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        return view =('pelanggan.index')
+       // return view =('pelanggan.index')
     }
 
     /**
@@ -23,7 +23,7 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        return view =('pelanggan.create')
+       // return view =('pelanggan.create')
     }
 
     /**

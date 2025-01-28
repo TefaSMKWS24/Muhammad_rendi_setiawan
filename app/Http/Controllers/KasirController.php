@@ -15,7 +15,7 @@ class KasirController extends Controller
      */
     public function index()
     {
-        return view =('kasir.index')
+       // return view =('kasir.index')
     }
 
     /**
@@ -23,7 +23,7 @@ class KasirController extends Controller
      */
     public function create()
     {
-        return view =('kasir.create')
+       // return view =('kasir.create')
     }
 
     /**
@@ -56,14 +56,28 @@ class KasirController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'stok'  =>  'required',
+            'kode_kategori' =>  'required',
+        ]);
     }
+
+    $data = [
+        'nama_kasir' => $request->nama_kasir,
+        'shift_mulai' => $request->shift_mulai,
+        'shift_akhir' => $request->shift_akhir,
+        'nohp' => $request->nohp,
+    ];
+    DB::table('kasir')->where('kode_kasir', $id)->update($data);
+    return redirect()->route('kasir.index')->with('success', 'Data kasir berhasil diperbarui.');
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('kasir')->where('kode_kasir', $id)->delete();
+        return redirect()-view('kasir.index');
+    }
     }
 }

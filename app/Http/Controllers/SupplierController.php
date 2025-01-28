@@ -15,7 +15,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view =('supplier.index')
+       // return view =('supplier.index')
     }
 
     /**
@@ -23,7 +23,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view =('supplier.create')
+       // return view =('supplier.create')
     }
 
     /**

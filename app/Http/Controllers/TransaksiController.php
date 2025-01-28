@@ -15,7 +15,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        return view =('transaksi.index')
+       // return view =('transaksi.index')
     }
 
     /**
@@ -23,7 +23,7 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        return view =('transaksi.create')
+       // return view =('transaksi.create')
     }
 
     /**
