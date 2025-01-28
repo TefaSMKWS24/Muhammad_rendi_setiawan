@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\facedas\DB;
+use Illuminate\Support\facedas\Redirect;
+use Illuminate\Support\facedas\Validator;
+
 class TransaksiController extends Controller
 {
     /**
@@ -11,7 +15,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        return view =('transaksi.index')
     }
 
     /**
@@ -19,7 +23,7 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
+        return view =('transaksi.create')
     }
 
     /**
@@ -35,7 +39,8 @@ class TransaksiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $transaksi = DB::table('transaksi')->where('kode_transaksi', $id)->first();
+        return view('transaksi.edit', compact('transaksi'));
     }
 
     /**
