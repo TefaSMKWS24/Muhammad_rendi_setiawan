@@ -13,6 +13,7 @@ class KategoriController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
        // return view =('kategori.index')
@@ -56,7 +57,19 @@ class KategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_kategori' => 'required',
+            'nama_supplier' => 'required',
+
+        ])
+
+        $data = [
+            'nama_kategori' => $request->nama_kategori,
+            'nama_supplier' => $request->nama_supplier,
+        ];
+
+        DB::table('kategori')->where('kode_kategori', $id)->update($data);
+        return redirect::route('kategori.index')-with('success', 'Data Berhasil Dihapus');
     }
 
     /**
