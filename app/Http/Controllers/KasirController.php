@@ -57,19 +57,22 @@ class KasirController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'stok'  =>  'required',
-            'kode_kategori' =>  'required',
+            'nama_kasir' => 'required',
+            'shift_mulai' => 'required',
+            'shift_selesai' => 'required',
+            'nohp' => 'required',
         ]);
-    }
 
-    $data = [
-        'nama_kasir' => $request->nama_kasir,
-        'shift_mulai' => $request->shift_mulai,
-        'shift_akhir' => $request->shift_akhir,
-        'nohp' => $request->nohp,
-    ];
-    DB::table('kasir')->where('kode_kasir', $id)->update($data);
-    return redirect()->route('kasir.index')->with('success', 'Data kasir berhasil diperbarui.');
+        $data = [
+            'nama_kasir' => $request->nama_kasir,
+            'shift_mulai' => $request->shift_mulai,
+            'shift_selesai' => $request->shift_selesai,
+            'nohp' => $request->nohp,
+        ];
+
+        DB::table('kasir')->where('kode_kasir', $id)->update($data);
+        return redirect()->route('kasir.index');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -79,5 +82,5 @@ class KasirController extends Controller
         DB::table('kasir')->where('kode_kasir', $id)->delete();
         return redirect()-view('kasir.index');
     }
-    }
 }
+
