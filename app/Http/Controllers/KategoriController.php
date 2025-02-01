@@ -61,7 +61,7 @@ class KategoriController extends Controller
             'nama_kategori' => 'required',
             'nama_supplier' => 'required',
 
-        ])
+        ]);
 
         $data = [
             'nama_kategori' => $request->nama_kategori,
@@ -69,7 +69,7 @@ class KategoriController extends Controller
         ];
 
         DB::table('kategori')->where('kode_kategori', $id)->update($data);
-        return redirect::route('kategori.index')-with('success', 'Data Berhasil Dihapus');
+        return redirect::route('kategori.index')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
