@@ -56,7 +56,18 @@ class PelangganController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_pelanggan' => 'required',
+            'nohp' => 'required',
+        ]);
+
+        $data = [
+            'nama_pelanggan' => $request->nama_pelanggan,
+            'nohp' => $request->nohp,
+        ];
+
+        DB::table('pelanggan')->where('kode_pelanggan', $id)->update($data);
+        return redirect()->route('pelanggan.index');
     }
 
     /**
@@ -64,6 +75,7 @@ class PelangganController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('pelanggan')->where('kode_pelanggan', $id)->delete();
+        return redirect()-view('pelanggan.index');
     }
 }

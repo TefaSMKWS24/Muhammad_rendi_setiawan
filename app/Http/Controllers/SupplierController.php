@@ -64,6 +64,7 @@ class SupplierController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('supplier')->where('kode_supplier', $id)->delete();
+        return redirect()-view('supplier.index');
     }
 }

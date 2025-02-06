@@ -77,6 +77,7 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('kategori')->where('kode_kategori', $id)->delete();
+        return redirect()-view('kategori.index');
     }
 }
