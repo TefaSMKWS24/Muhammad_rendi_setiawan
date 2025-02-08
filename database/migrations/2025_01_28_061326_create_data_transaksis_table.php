@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_transaksi', function (Blueprint $table) {
-            $table->id();
-            $table->string('kode_trans', 6)->unique()->primary();
-            $table->date('tgl_trans');
+            $table->string('kode_transaksi', 6)->unique()->primary();
+            $table->date('tanggal_transaksi',);
             $table->string('kode_kasir', 6);
-            $table->string ('kode_pelanggan', 6);
+            $table->string('kode_barang', 6);
+            $table->string('kode_pelanggan', 6);
+            $table->bigInteger('total_belanja', 6);
             $table->timestamps();
         });
     }

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Illuminate\Support\facedas\DB;
-use Illuminate\Support\facedas\Redirect;
-use Illuminate\Support\facedas\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class KasirController extends Controller
 {
@@ -15,7 +14,7 @@ class KasirController extends Controller
      */
     public function index()
     {
-       // return view =('kasir.index')
+        return view('kasir.index');
     }
 
     /**
@@ -23,7 +22,8 @@ class KasirController extends Controller
      */
     public function create()
     {
-       // return view =('kasir.create')
+        return view('kasir.create');
+
     }
 
     /**
@@ -59,19 +59,19 @@ class KasirController extends Controller
         $request->validate([
             'nama_kasir' => 'required',
             'shift_mulai' => 'required',
-            'shift_selesai' => 'required',
+            'shift_akhir' => 'required',
             'nohp' => 'required',
         ]);
 
         $data = [
             'nama_kasir' => $request->nama_kasir,
             'shift_mulai' => $request->shift_mulai,
-            'shift_selesai' => $request->shift_selesai,
+            'shift_akhir' => $request->shift_akhir,
             'nohp' => $request->nohp,
         ];
 
         DB::table('kasir')->where('kode_kasir', $id)->update($data);
-        return redirect()->route('kasir.index');
+        return redirect()->route('kasir.index')->with('success', 'Data kasir berhasil diperbarui.');
     }
 
     /**
@@ -80,7 +80,6 @@ class KasirController extends Controller
     public function destroy(string $id)
     {
         DB::table('kasir')->where('kode_kasir', $id)->delete();
-        return redirect()-view('kasir.index');
+        return redirect()->route('kasir.index')->with('success', 'Data kasir berhasil dihapus.');
     }
 }
-

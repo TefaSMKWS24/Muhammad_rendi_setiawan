@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\facedas\DB;
-use Illuminate\Support\facedas\Redirect;
-use Illuminate\Support\facedas\Validator;
-
 class SupplierController extends Controller
 {
     /**
@@ -15,7 +11,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-       // return view =('supplier.index')
+        return view('supplier.index');
     }
 
     /**
@@ -23,7 +19,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-       // return view =('supplier.create')
+        //
     }
 
     /**
@@ -47,8 +43,7 @@ class SupplierController extends Controller
      */
     public function edit(string $id)
     {
-        $supplier = DB::table('supplier')->where('kode_supplier', $id)->first();
-        return view('supplier.edit', compact('supplier'));
+        //
     }
 
     /**
@@ -64,7 +59,6 @@ class SupplierController extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table('supplier')->where('kode_supplier', $id)->delete();
-        return redirect()-view('supplier.index');
+        //
     }
 }

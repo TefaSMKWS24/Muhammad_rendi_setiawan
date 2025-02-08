@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Illuminate\Support\facedas\DB;
-use Illuminate\Support\facedas\Redirect;
-use Illuminate\Support\facedas\Validator;
+use Illuminate\Support\Facades\DB;
+use illuminate\Support\facades\Redirect;
+use Illuminate\Support\facades\Validator;
 
 class TransaksiController extends Controller
 {
@@ -15,7 +14,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-       // return view =('transaksi.index')
+        return view('transaksi.index');
     }
 
     /**
@@ -23,39 +22,13 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-       // return view =('transaksi.create')
+        return view('transaksi.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $transaksi = DB::table('transaksi')->where('kode_transaksi', $id)->first();
-        return view('transaksi.edit', compact('transaksi'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        $barang = DB::table('transaksi')->where('id', $id)->first();
-        return view('transaksi.edit', compact('transaksi'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
     {
         $request->validate([
             'kode_transaksi' => 'required',
@@ -74,14 +47,14 @@ class TransaksiController extends Controller
             'kode_barang' => $request->kode_barang,
             'kode_pelanggan' => $request->kode_pelanggan,
             'total_belanja' => $request->total_belanja,
-            'total' => $request->total,
         ]);
 
         $datadetail = [
             'kode_transaksi' => $request->kode_transaksi,
             'kode_barang' => $request->kode_barang,
-            'jumlah' => $request->qty,
+            'jumlah' => $request->jumlah,
             'total' => $request->total,
+
         ];
 
         DB::table('transaksi')->insert($data);
@@ -90,11 +63,54 @@ class TransaksiController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        DB::table('transaksi')->where('id', $id)->first();
+        return view('transaksi.edit');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'kode_transaksi' => 'required',
+            'tanggal_transaksi' => 'required',
+            'kode_kasir' => 'required',
+            'kode_pelanggan' => 'required',
+            'total_belanja' => 'required',
+        ]);
+
+        $data = [
+            'kode_transaksi' => $request->kode_transaksi,
+            'tanggal_transaksi' => $request->tanggal_transaksi,
+            'kode_kasir' => $request->kode_kasir,
+            'kode_pelanggan' => $request->kode_pelanggan,
+            'total_belanja' => $request->total_belanja,
+        ];
+
+        DB::table('transaksi')->where('id', $id)->update($data);
+        return redirect()->route('transaksi.index')->with('success', 'Data berhasil diubah');
+
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        DB::table('transaksi')->where('kode_transaksi', $id)->delete();
-        return redirect()-view('transaksi.index');
+        DB::table('transaksi')->where('id', $id)->delete();
+        return redirect()->route('transaksi.index')->with('success', 'Data berhasil dihapus');
     }
 }

@@ -25,8 +25,8 @@ class AuthController extends Controller
 
     public function logoutkasir()
     {
-        if (Auth::guard('kasir')->check()){
-            Auth::guard('kasir')->logout();
+        if (Auth::guard('admin')->check()){
+            Auth::guard('admin')->logout();
             return redirect('/');
         }
     }

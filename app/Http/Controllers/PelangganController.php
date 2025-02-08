@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
-use Illuminate\Support\facedas\DB;
-use Illuminate\Support\facedas\Redirect;
-use Illuminate\Support\facedas\Validator;
 
 class PelangganController extends Controller
 {
@@ -15,7 +15,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-       // return view =('pelanggan.index')
+        return view('pelanggan.index');
     }
 
     /**
@@ -23,7 +23,8 @@ class PelangganController extends Controller
      */
     public function create()
     {
-       // return view =('pelanggan.create')
+        return view('pelanggan.create');
+
     }
 
     /**
@@ -66,8 +67,10 @@ class PelangganController extends Controller
             'nohp' => $request->nohp,
         ];
 
+
         DB::table('pelanggan')->where('kode_pelanggan', $id)->update($data);
-        return redirect()->route('pelanggan.index');
+        return Redirect::route('pelanggan.index');
+
     }
 
     /**
@@ -76,6 +79,6 @@ class PelangganController extends Controller
     public function destroy(string $id)
     {
         DB::table('pelanggan')->where('kode_pelanggan', $id)->delete();
-        return redirect()-view('pelanggan.index');
+        return Redirect::route('pelanggan.index');
     }
 }

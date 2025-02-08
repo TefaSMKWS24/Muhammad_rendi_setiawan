@@ -3,20 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
-use Illuminate\Support\facedas\DB;
-use Illuminate\Support\facedas\Redirect;
-use Illuminate\Support\facedas\Validator;
 
 class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
-       // return view =('kategori.index')
+        return view('kategori.index');
     }
 
     /**
@@ -24,7 +23,9 @@ class KategoriController extends Controller
      */
     public function create()
     {
-       // return view =('kategori.create')
+        return view('kategori.create');
+
+
     }
 
     /**
@@ -50,6 +51,7 @@ class KategoriController extends Controller
     {
         $kategori = DB::table('kategori')->where('kode_kategori', $id)->first();
         return view('kategori.edit', compact('kategori'));
+
     }
 
     /**
@@ -69,7 +71,7 @@ class KategoriController extends Controller
         ];
 
         DB::table('kategori')->where('kode_kategori', $id)->update($data);
-        return redirect::route('kategori.index')->with('success', 'Data Berhasil Diubah');
+        return Redirect::route('kategori.index')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -78,6 +80,6 @@ class KategoriController extends Controller
     public function destroy(string $id)
     {
         DB::table('kategori')->where('kode_kategori', $id)->delete();
-        return redirect()-view('kategori.index');
+        return Redirect::route('kategori.index')->with('success', 'Data Berhasil Dihapus');
     }
 }
